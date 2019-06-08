@@ -21,6 +21,7 @@
 		DB9F2BE222AC1EEC00063B23 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9F2BE122AC1EEC00063B23 /* AppStore.swift */; };
 		DB9F2BE422AC257500063B23 /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9F2BE322AC257500063B23 /* SearchParameter.swift */; };
 		DB9F2BE722AC26A900063B23 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9F2BE622AC26A900063B23 /* Stub.swift */; };
+		DB9F2BE922AC2EFB00063B23 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9F2BE822AC2EFA00063B23 /* SearchResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		DB9F2BE122AC1EEC00063B23 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		DB9F2BE322AC257500063B23 /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
 		DB9F2BE622AC26A900063B23 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
+		DB9F2BE822AC2EFA00063B23 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				DB9F2BE322AC257500063B23 /* SearchParameter.swift */,
+				DB9F2BE822AC2EFA00063B23 /* SearchResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB7C324B22A84D57001A8229 /* AppDelegate.swift in Sources */,
+				DB9F2BE922AC2EFB00063B23 /* SearchResult.swift in Sources */,
 				DB7C324D22A84D57001A8229 /* SceneDelegate.swift in Sources */,
 				DB9F2BE422AC257500063B23 /* SearchParameter.swift in Sources */,
 				DB9F2BE722AC26A900063B23 /* Stub.swift in Sources */,
