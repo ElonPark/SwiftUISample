@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB10A66522ACE90B00400BA4 /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = DB10A66422ACE90B00400BA4 /* ObjectMapper */; };
+		DB10A66722ACF20D00400BA4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB10A66622ACF20D00400BA4 /* MainViewModel.swift */; };
+		DB10A66922ACFE0200400BA4 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB10A66822ACFE0200400BA4 /* APIError.swift */; };
 		DB697EDD22ABEFE9006874AE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DB697EDC22ABEFE9006874AE /* Alamofire */; };
 		DB7C324B22A84D57001A8229 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C324A22A84D57001A8229 /* AppDelegate.swift */; };
 		DB7C324D22A84D57001A8229 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C324C22A84D57001A8229 /* SceneDelegate.swift */; };
@@ -42,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB10A66622ACF20D00400BA4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		DB10A66822ACFE0200400BA4 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		DB7C324722A84D57001A8229 /* SwiftUISample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUISample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB7C324A22A84D57001A8229 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB7C324C22A84D57001A8229 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB10A66522ACE90B00400BA4 /* ObjectMapper in Frameworks */,
 				DB9F2BDB22AC15BA00063B23 /* Nuke in Frameworks */,
 				DB697EDD22ABEFE9006874AE /* Alamofire in Frameworks */,
 				DB9F2BDE22AC1C2900063B23 /* Moya in Frameworks */,
@@ -175,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				DB9F2BE122AC1EEC00063B23 /* AppStore.swift */,
+				DB10A66822ACFE0200400BA4 /* APIError.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -182,6 +189,7 @@
 		DB9F2BE022AC1E5C00063B23 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DB10A66622ACF20D00400BA4 /* MainViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -214,6 +222,7 @@
 				DB697EDC22ABEFE9006874AE /* Alamofire */,
 				DB9F2BDA22AC15BA00063B23 /* Nuke */,
 				DB9F2BDD22AC1C2900063B23 /* Moya */,
+				DB10A66422ACE90B00400BA4 /* ObjectMapper */,
 			);
 			productName = SwiftUISample;
 			productReference = DB7C324722A84D57001A8229 /* SwiftUISample.app */;
@@ -292,6 +301,7 @@
 				DB697EDE22ABF07D006874AE /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				DB9F2BD922AC15BA00063B23 /* XCRemoteSwiftPackageReference "Nuke" */,
 				DB9F2BDC22AC1C2900063B23 /* XCRemoteSwiftPackageReference "Moya" */,
+				DB10A66322ACE90B00400BA4 /* XCRemoteSwiftPackageReference "ObjectMapper" */,
 			);
 			productRefGroup = DB7C324822A84D57001A8229 /* Products */;
 			projectDirPath = "";
@@ -343,6 +353,8 @@
 				DB9F2BE722AC26A900063B23 /* Stub.swift in Sources */,
 				DB9F2BE222AC1EEC00063B23 /* AppStore.swift in Sources */,
 				DB7C324F22A84D57001A8229 /* MainView.swift in Sources */,
+				DB10A66722ACF20D00400BA4 /* MainViewModel.swift in Sources */,
+				DB10A66922ACFE0200400BA4 /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +528,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.elonparks.SwiftUISample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -536,6 +549,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.elonparks.SwiftUISample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -667,6 +681,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DB10A66322ACE90B00400BA4 /* XCRemoteSwiftPackageReference "ObjectMapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tristanhimmelman/ObjectMapper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.5.0;
+			};
+		};
 		DB697EDB22ABEFE9006874AE /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -702,6 +724,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DB10A66422ACE90B00400BA4 /* ObjectMapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB10A66322ACE90B00400BA4 /* XCRemoteSwiftPackageReference "ObjectMapper" */;
+			productName = ObjectMapper;
+		};
 		DB697EDC22ABEFE9006874AE /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DB697EDB22ABEFE9006874AE /* XCRemoteSwiftPackageReference "Alamofire" */;

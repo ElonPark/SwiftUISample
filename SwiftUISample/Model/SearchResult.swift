@@ -7,141 +7,119 @@
 //
 
 import Foundation
+import ObjectMapper
 
 
 // MARK: - SearchResult
-struct SearchResult: Codable {
-    let resultCount: Int
-    let results: [Result]
+
+struct SearchResult: Mappable {
+    private(set) var resultCount: Int = 0
+    private(set) var results = [ResultElement]()
+    
+    init?(map: Map) {}
+    
+    mutating func mapping(map: Map) {
+        resultCount <- map["resultCount"]
+        results <- map["results"]
+    }
 }
 
 
-// MARK: SearchResult convenience initializers and mutators
 
-extension SearchResult {
-    init(data: Data) throws {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        self = try decoder.decode(SearchResult.self, from: data)
-    }
-    
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-    func jsonData() throws -> Data {
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
-        return try encoder.encode(self)
-    }
-    
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
-    }
-}
+// MARK: - ResultElement
 
-// MARK: - Result
-struct Result: Codable {
-    let artistViewURL: String
-    let artworkUrl60, artworkUrl100: String
-    let isGameCenterEnabled: Bool
-    let ipadScreenshotUrls: [String]
-    let appletvScreenshotUrls: [String]
-    let artworkUrl512: String
-    let screenshotUrls: [String]
-    let supportedDevices: [String]
-    let advisories: [String]
-    let kind: String
-    let features: [String]
-    let trackCensoredName: String
-    let trackViewURL: String
-    let contentAdvisoryRating: String
-    let averageUserRatingForCurrentVersion: Double?
-    let languageCodesISO2A: [String]
-    let fileSizeBytes: String
-    let sellerURL: String?
-    let userRatingCountForCurrentVersion: Int?
-    let trackContentRating: String
-    let trackID: Int
-    let trackName: String
-    let currentVersionReleaseDate: Date
-    let minimumOSVersion: String
-    let releaseNotes: String?
-    let sellerName: String
-    let isVppDeviceBasedLicensingEnabled: Bool
-    let currency: String
-    let wrapperType: String
-    let version: String
-    let genreIDS: [String]
-    let formattedPrice: String
-    let artistID: Int
-    let artistName: String
-    let genres: [String]
-    let price: Int
-    let resultDescription, bundleID: String
-    let releaseDate: Date
-    let primaryGenreName: String
-    let primaryGenreID: Int
-    let averageUserRating: Double?
-    let userRatingCount: Int?
+struct ResultElement: Mappable {
+    private(set) var artistViewURL: String = ""
+    private(set) var artworkUrl60: String = ""
+    private(set) var artworkUrl100: String = ""
+    private(set) var isGameCenterEnabled: Bool = false
+    private(set) var ipadScreenshotURLs = [String]()
+    private(set) var appletvScreenshotURLs = [String]()
+    private(set) var artworkUrl512: String = ""
+    private(set) var screenshotURLs = [String]()
+    private(set) var supportedDevices = [String]()
+    private(set) var advisories = [String]()
+    private(set) var kind: String = ""
+    private(set) var features = [String]()
+    private(set) var trackCensoredName: String = ""
+    private(set) var trackViewURL: String = ""
+    private(set) var contentAdvisoryRating: String?
+    private(set) var averageUserRatingForCurrentVersion: Double?
+    private(set) var languageCodesISO2A = [String]()
+    private(set) var fileSizeBytes: String = ""
+    private(set) var sellerURL: String?
+    private(set) var userRatingCountForCurrentVersion: Int?
+    private(set) var trackContentRating: String = ""
+    private(set) var trackID: Int = 0
+    private(set) var trackName: String!
+    private(set) var currentVersionReleaseDate: Date?
+    private(set) var minimumOSVersion: String = ""
+    private(set) var releaseNotes: String?
+    private(set) var sellerName: String = ""
+    private(set) var isVppDeviceBasedLicensingEnabled: Bool = false
+    private(set) var currency: String?
+    private(set) var wrapperType: String?
+    private(set) var version: String = ""
+    private(set) var genreIDS = [String]()
+    private(set) var formattedPrice: String?
+    private(set) var artistID: Int = 0
+    private(set) var artistName: String = ""
+    private(set) var genres = [String]()
+    private(set) var price: Int = 0
+    private(set) var description: String = ""
+    private(set) var bundleID: String = ""
+    private(set) var releaseDate: Date?
+    private(set) var primaryGenreName: String = ""
+    private(set) var primaryGenreID: Int = 0
+    private(set) var averageUserRating: Double?
+    private(set) var userRatingCount: Int?
     
-    enum CodingKeys: String, CodingKey {
-        case artistViewURL = "artistViewUrl"
-        case artworkUrl60, artworkUrl100, isGameCenterEnabled, ipadScreenshotUrls, appletvScreenshotUrls, artworkUrl512, screenshotUrls, supportedDevices, advisories, kind, features, trackCensoredName
-        case trackViewURL = "trackViewUrl"
-        case contentAdvisoryRating, averageUserRatingForCurrentVersion, languageCodesISO2A, fileSizeBytes
-        case sellerURL = "sellerUrl"
-        case userRatingCountForCurrentVersion, trackContentRating
-        case trackID = "trackId"
-        case trackName, currentVersionReleaseDate
-        case minimumOSVersion = "minimumOsVersion"
-        case releaseNotes, sellerName, isVppDeviceBasedLicensingEnabled, currency, wrapperType, version
-        case genreIDS = "genreIds"
-        case formattedPrice
-        case artistID = "artistId"
-        case artistName, genres, price
-        case resultDescription = "description"
-        case bundleID = "bundleId"
-        case releaseDate, primaryGenreName
-        case primaryGenreID = "primaryGenreId"
-        case averageUserRating, userRatingCount
-    }
-}
-
-// MARK: Result convenience initializers and mutators
-
-extension Result {
-    init(data: Data) throws {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        self = try decoder.decode(Result.self, from: data)
-    }
+    init?(map: Map) {}
     
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-    func jsonData() throws -> Data {
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
-        return try encoder.encode(self)
-    }
-    
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+    mutating func mapping(map: Map) {
+        artistViewURL <- map["artistViewUrl"]
+        artworkUrl60 <- map["artworkUrl60"]
+        artworkUrl100 <- map["artworkUrl100"]
+        isGameCenterEnabled <- map["isGameCenterEnabled"]
+        ipadScreenshotURLs <- map["ipadScreenshotUrls"]
+        appletvScreenshotURLs <- map["appletvScreenshotUrls"]
+        artworkUrl512 <- map["artworkUrl512"]
+        screenshotURLs <- map["screenshotUrls"]
+        supportedDevices <- map["supportedDevices"]
+        advisories <- map["advisories"]
+        kind <- map["kind"]
+        features <- map["features"]
+        trackCensoredName <- map["trackCensoredName"]
+        trackViewURL <- map["trackViewUrl"]
+        contentAdvisoryRating <- map["contentAdvisoryRating"]
+        averageUserRatingForCurrentVersion <- map["averageUserRatingForCurrentVersion"]
+        languageCodesISO2A <- map["languageCodesISO2A"]
+        fileSizeBytes <- map["fileSizeBytes"]
+        sellerURL <- map["sellerUrl"]
+        userRatingCountForCurrentVersion <- map["userRatingCountForCurrentVersion"]
+        trackContentRating <- map["trackContentRating"]
+        trackID <- map["trackID"]
+        trackName <- map["trackName"]
+        currentVersionReleaseDate <- (map["currentVersionReleaseDate"], DateTransform())
+        minimumOSVersion <- map["minimumOsVersion"]
+        releaseNotes <- map["releaseNotes"]
+        sellerName <- map["sellerName"]
+        isVppDeviceBasedLicensingEnabled <- map["isVppDeviceBasedLicensingEnabled"]
+        currency <- map["currency"]
+        wrapperType <- map["wrapperType"]
+        version <- map["version"]
+        genreIDS <- map["genreIds"]
+        formattedPrice <- map["formattedPrice"]
+        artistID <- map["artistId"]
+        artistName <- map["artistName"]
+        genres <- map["genres"]
+        price <- map["price"]
+        description <- map["description"]
+        bundleID <- map["bundleId"]
+        releaseDate <- (map["releaseDate"], DateTransform())
+        primaryGenreName <- map["primaryGenreName"]
+        primaryGenreID <- map["primaryGenreId"]
+        averageUserRating <- map["averageUserRating"]
+        userRatingCount <- map["userRatingCount"]
     }
 }
