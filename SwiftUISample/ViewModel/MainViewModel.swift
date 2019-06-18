@@ -29,27 +29,34 @@ final class MainViewModel {
     }
     
     func stubRequest() {
-        let result = Mapper<SearchResult>().map(JSONString: Stub().searchResult)!
-        searchResults.send(result.results)
+        let result = SearchResult(JSONString: Stub().searchResult)
+        searchResults.send(result!.results)
     }
     
     func search(keword: String) {
-        api.request(.search(parameter: SearchParameter(term: keword))) { [weak self]  response in
-            guard let `self` = self else { return }
+        api.request(.search(parameter: SearchParameter(term: keword))) {  response in
+            print(keword)
+            print(response.result)
+            
+            //guard let `self` = self else { return }
             switch response.result {
             case .success(let result):
                 do {
                     let json = try result.mapJSON()
                     if let searchResult = Mapper<SearchResult>().map(JSONObject: json) {
                         self.searchResults.send(searchResult.results)
+                        self.searchResults.send(completion: .finished)
                     } else {
                         print(APIError.jsonError.localizedDescription)
+                        self.searchResults.send(completion: .failure(APIError.jsonError))
                     }
                 } catch {
                     print(error.localizedDescription)
+                    self.searchResults.send(completion: .failure(error))
                 }
             case .failure(let error):
                 print(error.localizedDescription)
+                self.searchResults.send(completion: .failure(error))
             }
         }
         

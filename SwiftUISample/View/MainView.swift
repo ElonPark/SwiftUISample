@@ -7,36 +7,34 @@
 //
 
 import SwiftUI
+import Combine
 
 struct MainView : View {
     
-    @EnvironmentObject var viewModel: MainViewModel
+    let viewModel = MainViewModel(testMode: false)
+    //@EnvironmentObject var viewModel: MainViewModel
     
     //TODO: 검색어 바인딩
-    @State var searchText: String
+//    @State var searchText: String
     
     //TODO: 검색 필드 추가
     //TODO: 검색어 뷰모델과 바인딩
     var body: some View {
-        NavigationView{
-            //TODO: 앱스토어 검색 UI 구현
-            List {
-                ForEach(viewModel.searchResults.value.identified(by: \.trackID)) { app in
-                    //TODO: 앱스토어 검색내용 UI 구현
-                    Hstack {
-                        Image().background(.lightGray)
-                        Text(app.trackName)
-                    }
-                }
-            }.navigationBarTitle(Text("AppStore"))
-        }
+        Text(getSample())
+    }
+    
+    func getSample() -> String {
+        viewModel.search(keword: "kakao")
+        print(viewModel.searchResults.value)
+        
+        return "aaaa"
     }
 }
 
 #if DEBUG
 struct MainView_Previews : PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: MainViewModel(testMode: true))
+        MainView()
     }
 }
 #endif
